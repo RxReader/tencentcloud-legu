@@ -1,0 +1,3 @@
+rootProject.name = 'tencentcloud-legu'
+include 'legu'
+

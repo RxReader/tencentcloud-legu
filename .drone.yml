@@ -1,0 +1,103 @@
+kind: pipeline
+name: default
+
+steps:
+- name: download
+  image: alpine:3.9.2
+  environment:
+    TEST_APK_URL:
+      from_secret: TEST_APK_URL
+  commands:
+  - mkdir /legu/apk
+  - wget $DOWNLOAD_URL -P /legu/apk
+
+- name: junit4-test
+  image: openjdk:8-jdk-alpine
+  volumes:
+  - name: gradle
+    path: /root/.gradle
+  environment:
+    TENCENT_SECRET_ID:
+      from_secret: TENCENT_SECRET_ID
+    TENCENT_SECRET_KEY:
+      from_secret: TENCENT_SECRET_KEY
+    TENCENT_REGION:
+      from_secret: TENCENT_REGION
+  commands:
+  - ./gradlew :legu:clean :legu:test --info
+
+- name: shadowjar
+  image: openjdk:8-jdk-alpine
+  volumes:
+  - name: gradle
+    path: /root/.gradle
+  commands:
+  - ./gradlew :legu:clean :legu:shadowJar
+
+#- name: shadowjar-test
+#  image: openjdk:8-jdk-alpine
+#  environment:
+#    TENCENT_SECRET_ID:
+#      from_secret: TENCENT_SECRET_ID
+#    TENCENT_SECRET_KEY:
+#      from_secret: TENCENT_SECRET_KEY
+#    TENCENT_REGION:
+#      from_secret: TENCENT_REGION
+#  commands:
+#  - java -jar legu/build/libs/legu-all.jar --h
+#  - java -jar legu/build/libs/legu-all.jar --v
+
+volumes:
+- name: gradle
+  temp: {}
+
+#---
+#kind: pipeline
+#name: publish
+#
+#steps:
+#- name: shadowjar
+#  image: openjdk:8-jdk-alpine
+#  volumes:
+#  - name: gradle
+#    path: /root/.gradle
+#  environment:
+#    VERSION_NAME: ${DRONE_TAG}
+#  commands:
+#  - ./gradlew :legu:clean :legu:shadowJar
+#
+#- name: publish-github
+#  image: plugins/github-release
+#  settings:
+#    api_key:
+#      from_secret: GITHUB_TOKEN
+#    files:
+#    - legu/build/libs/*
+#    checksum:
+#    - sha256
+#    title: ${DRONE_TAG}
+#
+#- name: publish-docker
+#  image: plugins/docker
+#  settings:
+#    repo: v7lin/legu
+#    username:
+#      from_secret: REGISTRY_USER
+#    password:
+#      from_secret: REGISTRY_PASSWORD
+#    tags:
+#    - ${DRONE_TAG}
+#    - latest
+#
+#volumes:
+#- name: gradle
+#  temp: {}
+#
+#trigger:
+#  status:
+#  - success
+#  event:
+#  - tag
+#
+#depends_on:
+#- default
