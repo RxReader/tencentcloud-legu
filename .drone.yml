@@ -9,7 +9,7 @@ steps:
       from_secret: TEST_APK_URL
   commands:
   - mkdir legu/apk
-  - wget $DOWNLOAD_URL -P legu/apk
+  - wget $TEST_APK_URL -P legu/apk
 
 - name: junit4-test
   image: openjdk:8-jdk-alpine
