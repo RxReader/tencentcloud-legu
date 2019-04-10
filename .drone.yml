@@ -44,8 +44,8 @@ steps:
 #    TENCENT_REGION:
 #      from_secret: TENCENT_REGION
 #  commands:
-#  - java -jar legu/build/libs/legu-all.jar --h
-#  - java -jar legu/build/libs/legu-all.jar --v
+#  - java -jar legu/build/libs/legu-all.jar -h
+#  - java -jar legu/build/libs/legu-all.jar -v
 
 volumes:
 - name: gradle

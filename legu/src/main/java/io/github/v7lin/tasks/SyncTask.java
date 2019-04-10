@@ -1,4 +1,4 @@
-package io.github.v7lin.task;
+package io.github.v7lin.tasks;
 
 public abstract class SyncTask<R> {
 

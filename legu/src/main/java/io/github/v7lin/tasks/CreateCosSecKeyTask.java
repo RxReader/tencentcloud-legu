@@ -1,4 +1,4 @@
-package io.github.v7lin.task;
+package io.github.v7lin.tasks;
 
 import com.tencentcloudapi.ms.v20180408.models.CreateCosSecKeyInstanceRequest;
 import com.tencentcloudapi.ms.v20180408.models.CreateCosSecKeyInstanceResponse;

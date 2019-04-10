@@ -1,9 +1,9 @@
 package io.github.v7lin;
 
 import com.tencentcloudapi.ms.v20180408.models.CreateCosSecKeyInstanceResponse;
-import io.github.v7lin.task.CreateCosSecKeyTask;
-import io.github.v7lin.task.CreateShieldTask;
-import io.github.v7lin.task.UploadTask;
+import io.github.v7lin.tasks.CreateCosSecKeyTask;
+import io.github.v7lin.tasks.CreateShieldTask;
+import io.github.v7lin.tasks.UploadTask;
 import net.dongliu.apk.parser.ApkFile;
 import net.dongliu.apk.parser.bean.ApkMeta;
 import net.dongliu.apk.parser.bean.IconFace;

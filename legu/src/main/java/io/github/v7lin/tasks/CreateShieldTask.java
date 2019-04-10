@@ -1,4 +1,4 @@
-package io.github.v7lin.task;
+package io.github.v7lin.tasks;
 
 import com.qcloud.cos.utils.BinaryUtils;
 import com.qcloud.cos.utils.Md5Utils;
