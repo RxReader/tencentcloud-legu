@@ -1,10 +1,12 @@
 # tencentcloud-legu
 
+[![Build Status](https://cloud.drone.io/api/badges/v7lin/tencentcloud-legu/status.svg)](https://cloud.drone.io/v7lin/tencentcloud-legu)
+
 ### libraries
 
-[hsiafan/apk-parser](https://github.com/hsiafan/apk-parser)
-[TencentCloud/tencentcloud-sdk-java](https://github.com/TencentCloud/tencentcloud-sdk-java)
-[tencentyun/cos-java-sdk-v5](https://github.com/tencentyun/cos-java-sdk-v5)
+* [hsiafan/apk-parser](https://github.com/hsiafan/apk-parser)
+* [TencentCloud/tencentcloud-sdk-java](https://github.com/TencentCloud/tencentcloud-sdk-java)
+* [tencentyun/cos-java-sdk-v5](https://github.com/tencentyun/cos-java-sdk-v5)
 
 ### 腾讯云
 
