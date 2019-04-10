@@ -24,7 +24,7 @@ public final class ConfigureCommand extends Command {
     }
 
     @Override
-    protected void exec() throws Exception {
+    protected void execute() throws Exception {
 
     }
 }

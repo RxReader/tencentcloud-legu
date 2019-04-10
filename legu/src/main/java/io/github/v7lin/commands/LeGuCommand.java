@@ -19,7 +19,7 @@ public final class LeGuCommand extends Command {
     }
 
     @Override
-    protected void exec() throws Exception {
+    protected void execute() throws Exception {
 
     }
 }

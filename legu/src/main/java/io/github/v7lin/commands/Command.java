@@ -2,12 +2,12 @@ package io.github.v7lin.commands;
 
 public abstract class Command {
 
-    public final void execute() throws Exception {
+    public final void exec() throws Exception {
         checkArgs();
-        exec();
+        execute();
     }
 
     protected abstract void checkArgs();
 
-    protected abstract void exec() throws Exception;
+    protected abstract void execute() throws Exception;
 }

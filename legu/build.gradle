@@ -7,7 +7,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 jar {
     manifest {
         attributes 'Main-Class': 'io.github.v7lin.Main'
-        attributes 'LeGu-Version': VERSION_NAME
+        attributes 'LeGu-CLI-Version': VERSION_NAME
     }
 }
 
