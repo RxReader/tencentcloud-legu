@@ -3,6 +3,7 @@ package io.github.v7lin;
 import com.tencentcloudapi.ms.v20180408.models.CreateCosSecKeyInstanceResponse;
 import io.github.v7lin.tasks.CreateCosSecKeyTask;
 import io.github.v7lin.tasks.CreateShieldTask;
+import io.github.v7lin.tasks.DownloadTask;
 import io.github.v7lin.tasks.UploadTask;
 import net.dongliu.apk.parser.ApkFile;
 import net.dongliu.apk.parser.bean.ApkMeta;
@@ -21,13 +22,16 @@ public final class LeGuTest {
 
     @Test
     public void test() throws Exception {
+        System.out.println(System.getProperties().getProperty("user.home"));
+        System.out.println(System.getProperties().getProperty("user.dir"));
+
         String secretId = System.getenv("TENCENT_SECRET_ID");
         String secretKey = System.getenv("TENCENT_SECRET_KEY");
         String region = System.getenv("TENCENT_REGION");
 
-        File projectDir = new File("apk");
+        File apkDir = new File("apk");
 
-        File[] apks = projectDir.listFiles(new FilenameFilter() {
+        File[] apks = apkDir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 return name.endsWith(".apk");
@@ -39,6 +43,7 @@ public final class LeGuTest {
         }
 
         File apk = apks[0];
+        System.out.println("apk: " + apk.getName());
 
         ApkFile apkFile = new ApkFile(apk);
 
@@ -58,5 +63,8 @@ public final class LeGuTest {
         // 加固
         URL leguApkUrl = new CreateShieldTask(secretId, secretKey, region, apk, apkMeta, apkUrl).execute();
         System.out.println("legu apk url: " + leguApkUrl.toString());
+
+        File leguApk = new DownloadTask(leguApkUrl, apkDir).execute();
+        System.out.println("legu apk: " + leguApk.getName());
     }
 }

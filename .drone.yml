@@ -34,18 +34,18 @@ steps:
   commands:
   - ./gradlew :legu:clean :legu:shadowJar
 
-#- name: shadowjar-test
-#  image: openjdk:8-jdk-alpine
-#  environment:
-#    TENCENT_SECRET_ID:
-#      from_secret: TENCENT_SECRET_ID
-#    TENCENT_SECRET_KEY:
-#      from_secret: TENCENT_SECRET_KEY
-#    TENCENT_REGION:
-#      from_secret: TENCENT_REGION
-#  commands:
-#  - java -jar legu/build/libs/legu-all.jar -h
-#  - java -jar legu/build/libs/legu-all.jar -v
+- name: shadowjar-test
+  image: openjdk:8-jdk-alpine
+  environment:
+    TENCENT_SECRET_ID:
+      from_secret: TENCENT_SECRET_ID
+    TENCENT_SECRET_KEY:
+      from_secret: TENCENT_SECRET_KEY
+    TENCENT_REGION:
+      from_secret: TENCENT_REGION
+  commands:
+  - java -jar legu/build/libs/legu-all.jar -version
+  - java -jar legu/build/libs/legu-all.jar -help
 
 volumes:
 - name: gradle
