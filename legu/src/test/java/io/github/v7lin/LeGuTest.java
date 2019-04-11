@@ -64,7 +64,7 @@ public final class LeGuTest {
         URL leguApkUrl = new CreateShieldTask(secretId, secretKey, region, apk, apkMeta, apkUrl).execute();
         System.out.println("legu apk url: " + leguApkUrl.toString());
 
-        File leguApk = new DownloadTask(leguApkUrl, apkDir).execute();
+        File leguApk = new DownloadTask(leguApkUrl, apkDir.getAbsolutePath()).execute();
         System.out.println("legu apk: " + leguApk.getName());
     }
 }

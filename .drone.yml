@@ -1,5 +1,5 @@
 kind: pipeline
-name: default
+name: junit4-test
 
 steps:
 - name: download
@@ -26,6 +26,24 @@ steps:
   commands:
   - ./gradlew :legu:clean :legu:test --info
 
+volumes:
+- name: gradle
+  temp: {}
+
+---
+kind: pipeline
+name: shadowjar-test
+
+steps:
+- name: download
+  image: alpine:3.9.2
+  environment:
+    TEST_APK_URL:
+      from_secret: TEST_APK_URL
+  commands:
+  - mkdir legu/apk
+  - wget $TEST_APK_URL -P legu/apk
+
 - name: shadowjar
   image: openjdk:8-jdk-alpine
   volumes:
@@ -50,6 +68,9 @@ steps:
 volumes:
 - name: gradle
   temp: {}
+
+depends_on:
+- junit4-test
 
 #---
 #kind: pipeline
