@@ -1,6 +1,7 @@
 # tencentcloud-legu
 
 [![Build Status](https://cloud.drone.io/api/badges/v7lin/tencentcloud-legu/status.svg)](https://cloud.drone.io/v7lin/tencentcloud-legu)
+[![Docker Pulls](https://img.shields.io/docker/pulls/v7lin/legu.svg)](https://hub.docker.com/r/v7lin/legu)
 
 ### libraries
 
