@@ -1,6 +1,5 @@
 package io.github.v7lin;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import com.tencentcloudapi.ms.v20180408.models.CreateCosSecKeyInstanceResponse;
 import io.github.v7lin.setup.Setup;
 import io.github.v7lin.setup.domain.Configure;
@@ -10,7 +9,6 @@ import io.github.v7lin.tasks.DownloadTask;
 import io.github.v7lin.tasks.UploadTask;
 import net.dongliu.apk.parser.ApkFile;
 import net.dongliu.apk.parser.bean.ApkMeta;
-import net.dongliu.apk.parser.bean.IconFace;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -18,8 +16,6 @@ import org.junit.runners.JUnit4;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.net.URL;
-import java.util.List;
-import java.util.Set;
 
 @RunWith(JUnit4.class)
 public final class LeGuTest {
