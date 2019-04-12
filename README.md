@@ -11,8 +11,8 @@
 
 ### 腾讯云
 
-[访问管理](https://console.cloud.tencent.com/cam/capi)
-[移动应用安全](https://console.cloud.tencent.com/ms/reinforce/list)
+* [访问管理](https://console.cloud.tencent.com/cam/capi)
+* [移动应用安全](https://console.cloud.tencent.com/ms/reinforce/list)
 
 ### usage
 
