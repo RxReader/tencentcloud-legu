@@ -3,6 +3,7 @@ package io.github.v7lin.tasks;
 import com.qcloud.cos.utils.BinaryUtils;
 import com.qcloud.cos.utils.Md5Utils;
 import com.tencentcloudapi.ms.v20180408.models.*;
+import io.github.v7lin.setup.domain.Configure;
 import net.dongliu.apk.parser.bean.ApkMeta;
 
 import java.io.File;
@@ -14,8 +15,8 @@ public final class CreateShieldTask extends MsClientTask<URL> {
     private final ApkMeta apkMeta;
     private final URL apkUrl;
 
-    public CreateShieldTask(String secretId, String secretKey, String region, File apk, ApkMeta apkMeta, URL apkUrl) {
-        super(secretId, secretKey, region);
+    public CreateShieldTask(Configure conf, File apk, ApkMeta apkMeta, URL apkUrl) {
+        super(conf);
         this.apk = apk;
         this.apkMeta = apkMeta;
         this.apkUrl = apkUrl;

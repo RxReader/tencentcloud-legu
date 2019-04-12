@@ -1,6 +1,9 @@
 package io.github.v7lin;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import com.tencentcloudapi.ms.v20180408.models.CreateCosSecKeyInstanceResponse;
+import io.github.v7lin.setup.Setup;
+import io.github.v7lin.setup.domain.Configure;
 import io.github.v7lin.tasks.CreateCosSecKeyTask;
 import io.github.v7lin.tasks.CreateShieldTask;
 import io.github.v7lin.tasks.DownloadTask;
@@ -16,6 +19,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(JUnit4.class)
 public final class LeGuTest {
@@ -28,6 +32,12 @@ public final class LeGuTest {
         String secretId = System.getenv("TENCENT_SECRET_ID");
         String secretKey = System.getenv("TENCENT_SECRET_KEY");
         String region = System.getenv("TENCENT_REGION");
+
+        Configure conf = new Configure(secretId, secretKey, region);
+        Setup.saveConf(conf);
+
+        conf = Setup.loadConf();
+        System.out.println(conf.secretId + " - " + conf.secretKey + " - " + conf.region);
 
         File apkDir = new File("apk");
 
@@ -49,19 +59,13 @@ public final class LeGuTest {
 
         ApkMeta apkMeta = apkFile.getApkMeta();
 
-        // icon
-        List<IconFace> iconFaces = apkFile.getAllIcons();
-        if (iconFaces == null || iconFaces.isEmpty()) {
-            throw new RuntimeException(apkMeta.getName() + "(" + apk.getName() + ")" + " doesn't have icon");
-        }
-
         // 上传文件到COS文件存储
-        CreateCosSecKeyInstanceResponse resp = new CreateCosSecKeyTask(secretId, secretKey, region).execute();
+        CreateCosSecKeyInstanceResponse resp = new CreateCosSecKeyTask(conf).execute();
         URL apkUrl = new UploadTask(resp, apk, apkMeta).execute();
         System.out.println("apk url: " + apkUrl.toString());
 
         // 加固
-        URL leguApkUrl = new CreateShieldTask(secretId, secretKey, region, apk, apkMeta, apkUrl).execute();
+        URL leguApkUrl = new CreateShieldTask(conf, apk, apkMeta, apkUrl).execute();
         System.out.println("legu apk url: " + leguApkUrl.toString());
 
         File leguApk = new DownloadTask(leguApkUrl, apkDir.getAbsolutePath()).execute();
