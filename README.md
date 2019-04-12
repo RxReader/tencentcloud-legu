@@ -32,4 +32,20 @@ docker run --rm -it -v ${PWD}/legu:/legu alpine:3.9.2 sh -c "mkdir /legu/apk && 
 * drone
 
 ````
+- name: legu-tencent
+  image: v7lin/legu
+  environment:
+    TENCENT_SECRET_ID:
+      from_secret: TENCENT_SECRET_ID
+    TENCENT_SECRET_KEY:
+      from_secret: TENCENT_SECRET_KEY
+    TENCENT_REGION:
+      from_secret: TENCENT_REGION
+  commands:
+  - echo "腾讯乐固"
+  - java -jar /legu/legu-all.jar -version
+  - APK_OUTPUT_DIR=app/build/outputs/apk/release
+  - java -jar /legu/legu-all.jar configure -secretId $TENCENT_SECRET_ID -secretKey $TENCENT_SECRET_KEY -region $TENCENT_REGION
+  - java -jar /legu/legu-all.jar legu -in $APK_OUTPUT_DIR/app-release.apk -out $APK_OUTPUT_DIR
+  - ls $APK_OUTPUT_DIR
 ````

@@ -62,6 +62,9 @@ public final class LeGuCommand extends Command {
         // 加固
         System.out.println("加固中...");
         URL leguApkUrl = new CreateShieldTask(conf, inputAPK, apkMeta, apkUrl).execute();
+
+        // 下载
+        System.out.println("下载加固包...");
         File leguApk = new DownloadTask(leguApkUrl, outputPath.getAbsolutePath()).execute();
         System.out.println("加固成功：" + leguApk.getAbsolutePath());
     }
