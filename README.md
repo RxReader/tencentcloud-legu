@@ -17,6 +17,10 @@
 * java
 
 ````
+java -jar legu/build/libs/legu-all.jar -version
+java -jar legu/build/libs/legu-all.jar -help
+java -jar legu/build/libs/legu-all.jar configure -secretId $TENCENT_SECRET_ID -secretKey $TENCENT_SECRET_KEY -region $TENCENT_REGION
+java -jar legu/build/libs/legu-all.jar legu -in legu/apk/*.apk -out legu/apk/
 ````
 
 * docker

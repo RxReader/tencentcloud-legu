@@ -64,6 +64,8 @@ steps:
   commands:
   - java -jar legu/build/libs/legu-all.jar -version
   - java -jar legu/build/libs/legu-all.jar -help
+  - java -jar legu/build/libs/legu-all.jar configure -secretId $TENCENT_SECRET_ID -secretKey $TENCENT_SECRET_KEY -region $TENCENT_REGION
+  - java -jar legu/build/libs/legu-all.jar legu -in legu/apk/*.apk -out legu/apk/
 
 volumes:
 - name: gradle
@@ -72,53 +74,53 @@ volumes:
 depends_on:
 - junit4-test
 
-#---
-#kind: pipeline
-#name: publish
-#
-#steps:
-#- name: shadowjar
-#  image: openjdk:8-jdk-alpine
-#  volumes:
-#  - name: gradle
-#    path: /root/.gradle
-#  environment:
-#    VERSION_NAME: ${DRONE_TAG}
-#  commands:
-#  - ./gradlew :legu:clean :legu:shadowJar
-#
-#- name: publish-github
-#  image: plugins/github-release
-#  settings:
-#    api_key:
-#      from_secret: GITHUB_TOKEN
-#    files:
-#    - legu/build/libs/*
-#    checksum:
-#    - sha256
-#    title: ${DRONE_TAG}
-#
-#- name: publish-docker
-#  image: plugins/docker
-#  settings:
-#    repo: v7lin/legu
-#    username:
-#      from_secret: REGISTRY_USER
-#    password:
-#      from_secret: REGISTRY_PASSWORD
-#    tags:
-#    - ${DRONE_TAG}
-#    - latest
-#
-#volumes:
-#- name: gradle
-#  temp: {}
-#
-#trigger:
-#  status:
-#  - success
-#  event:
-#  - tag
-#
-#depends_on:
-#- default
+---
+kind: pipeline
+name: publish
+
+steps:
+- name: shadowjar
+  image: openjdk:8-jdk-alpine
+  volumes:
+  - name: gradle
+    path: /root/.gradle
+  environment:
+    VERSION_NAME: ${DRONE_TAG}
+  commands:
+  - ./gradlew :legu:clean :legu:shadowJar
+
+- name: publish-github
+  image: plugins/github-release
+  settings:
+    api_key:
+      from_secret: GITHUB_TOKEN
+    files:
+    - legu/build/libs/*
+    checksum:
+    - sha256
+    title: ${DRONE_TAG}
+
+- name: publish-docker
+  image: plugins/docker
+  settings:
+    repo: v7lin/legu
+    username:
+      from_secret: REGISTRY_USER
+    password:
+      from_secret: REGISTRY_PASSWORD
+    tags:
+    - ${DRONE_TAG}
+    - latest
+
+volumes:
+- name: gradle
+  temp: {}
+
+trigger:
+  status:
+  - success
+  event:
+  - tag
+
+depends_on:
+- shadowjar-test
