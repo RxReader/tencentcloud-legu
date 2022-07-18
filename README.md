@@ -3,6 +3,8 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/v7lin/legu.svg)](https://hub.docker.com/r/v7lin/legu)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/v7lin/tencentcloud-legu/blob/master/LICENSE)
 
+> 官网工具 - [移动安全-应用加固命令行工具jar包使用说明](https://cloud.tencent.com/developer/article/1193406)
+
 ### libraries
 
 * [hsiafan/apk-parser](https://github.com/hsiafan/apk-parser)
